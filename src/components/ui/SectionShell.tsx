@@ -1,3 +1,5 @@
+import AnimatedSection from "./AnimatedSection";
+
 type SectionShellProps = {
   id: string;
   children: React.ReactNode;
@@ -6,12 +8,12 @@ type SectionShellProps = {
 
 const SectionShell = ({ id, children, className = "" }: SectionShellProps) => {
   return (
-    <section
+    <AnimatedSection
       id={id}
       className={`relative mx-auto w-full max-w-7xl scroll-mt-24 px-5 py-16 sm:px-8 lg:px-10 lg:py-24 ${className}`}
     >
       {children}
-    </section>
+    </AnimatedSection>
   );
 };
 

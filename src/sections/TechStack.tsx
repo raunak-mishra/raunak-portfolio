@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 
 import { techStack } from "../constants/portfolio";
 import Badge from "../components/ui/Badge";
+import GlassCard from "../components/ui/GlassCard";
 import SectionHeader from "../components/ui/SectionHeader";
 import SectionShell from "../components/ui/SectionShell";
 
@@ -16,26 +17,27 @@ const TechStack = () => {
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         {techStack.map((category, index) => (
-          <motion.article
+          <motion.div
             key={category.title}
-            className="border border-slate-800 bg-transparent p-5 transition duration-200 hover:border-slate-600"
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.35, delay: index * 0.04, ease: "easeOut" }}
+            transition={{ duration: 0.62, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="mb-5 border-b border-slate-800 pb-4">
-              <p className="font-mono text-[11px] text-green-300">$ {category.command}</p>
-              <h3 className="mt-3 font-display text-xl font-semibold text-slate-100">
-                {category.title}
-              </h3>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {category.tools.map((tool) => (
-                <Badge key={tool}>{tool}</Badge>
-              ))}
-            </div>
-          </motion.article>
+            <GlassCard as="article" className="h-full p-5">
+              <div className="mb-5 border-b border-white/10 pb-4">
+                <p className="font-mono text-[11px] text-emerald-200">$ {category.command}</p>
+                <h3 className="mt-3 font-display text-xl font-semibold tracking-[-0.03em] text-slate-100">
+                  {category.title}
+                </h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {category.tools.map((tool) => (
+                  <Badge key={tool}>{tool}</Badge>
+                ))}
+              </div>
+            </GlassCard>
+          </motion.div>
         ))}
       </div>
     </SectionShell>

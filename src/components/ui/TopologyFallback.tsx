@@ -16,24 +16,25 @@ const lines = [
 
 const TopologyFallback = () => {
   return (
-    <div className="relative h-full w-full overflow-hidden bg-[#0B0F14]">
+    <div className="relative h-full w-full overflow-hidden rounded-[2rem] bg-[#050713]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(56,189,248,0.18),transparent_36%),radial-gradient(circle_at_20%_80%,rgba(34,197,94,0.14),transparent_28%),linear-gradient(rgba(148,163,184,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.06)_1px,transparent_1px)] bg-[size:100%_100%,100%_100%,44px_44px,44px_44px]" />
       {lines.map((line) => (
         <span
           key={line}
-          className={`absolute h-px origin-left bg-slate-600 ${line}`}
+          className={`absolute h-px origin-left bg-gradient-to-r from-transparent via-cyan-200/55 to-transparent ${line}`}
         />
       ))}
       {nodes.map((node, index) => (
         <span
           key={node}
-          className={`absolute border bg-[#0B0F14] ${node}`}
+          className={`absolute rounded-full border bg-[#050713] shadow-[0_0_28px_rgba(34,211,238,0.22)] ${node}`}
         >
           {index === 0 ? (
-            <span className="absolute inset-[-12px] border border-slate-800" />
+            <span className="absolute inset-[-12px] rounded-full border border-cyan-300/20" />
           ) : null}
         </span>
       ))}
-      <div className="absolute left-0 top-16 border border-slate-800 bg-[#0B0F14] px-3 py-2 font-mono text-xs text-slate-400">
+      <div className="absolute left-4 top-16 rounded-full border border-white/10 bg-slate-950/70 px-3 py-2 font-mono text-xs text-slate-400 backdrop-blur-xl">
         topology.static / healthy
       </div>
     </div>
