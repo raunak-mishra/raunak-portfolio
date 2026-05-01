@@ -26,7 +26,7 @@ const TechStack = () => {
           >
             <GlassCard as="article" className="h-full p-5">
               <div className="mb-5 border-b border-white/10 pb-4">
-                <p className="font-mono text-[11px] text-emerald-200">$ {category.command}</p>
+                <p className="font-mono text-[11px] text-[rgb(var(--accent))]">$ {category.command}</p>
                 <h3 className="mt-3 font-display text-xl font-semibold tracking-[-0.03em] text-slate-100">
                   {category.title}
                 </h3>

@@ -6,20 +6,48 @@
 
 * {
   box-sizing: border-box;
-  color-scheme: dark;
   margin: 0;
   padding: 0;
 }
 
+:root,
+html[data-theme="dark"] {
+  --accent: 246 201 121;
+  --accent-2: 125 211 252;
+  --accent-3: 196 181 253;
+  --bg: 5 3 12;
+  --border: 255 255 255 / 0.1;
+  --grid: 246 201 121;
+  --muted: 148 163 184;
+  --panel: 22 18 31;
+  --panel-strong: 8 6 18;
+  --shadow: 0 0 0 / 0.42;
+  --text: 241 245 249;
+}
+
+html[data-theme="light"] {
+  --accent: 168 104 34;
+  --accent-2: 14 116 144;
+  --accent-3: 112 72 168;
+  --bg: 246 240 230;
+  --border: 18 22 31 / 0.12;
+  --grid: 168 104 34;
+  --muted: 82 92 108;
+  --panel: 255 252 246;
+  --panel-strong: 255 255 255;
+  --shadow: 67 46 25 / 0.14;
+  --text: 15 23 42;
+}
+
 html {
-  background: #030711;
+  background: rgb(var(--bg));
   scroll-behavior: smooth;
 }
 
 body {
   min-width: 320px;
-  background: #030711;
-  color: #e5e7eb;
+  background: rgb(var(--bg));
+  color: rgb(var(--text));
   font-family: "Geist", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   text-rendering: optimizeLegibility;
@@ -42,7 +70,7 @@ a {
 }
 
 ::selection {
-  background: rgba(34, 211, 238, 0.35);
+  background: rgb(var(--accent) / 0.35);
   color: #ffffff;
 }
 
@@ -75,6 +103,37 @@ a {
     right: 12%;
     top: 0;
   }
+}
+
+html[data-theme="light"] .text-slate-50,
+html[data-theme="light"] .text-slate-100,
+html[data-theme="light"] .text-slate-200,
+html[data-theme="light"] .text-slate-300 {
+  color: rgb(var(--text)) !important;
+}
+
+html[data-theme="light"] .text-slate-400,
+html[data-theme="light"] .text-slate-500 {
+  color: rgb(var(--muted)) !important;
+}
+
+html[data-theme="light"] .bg-slate-950\/45,
+html[data-theme="light"] .bg-slate-950\/50,
+html[data-theme="light"] .bg-slate-950\/55,
+html[data-theme="light"] .bg-slate-950\/60,
+html[data-theme="light"] .bg-slate-950\/65,
+html[data-theme="light"] .bg-slate-950\/70,
+html[data-theme="light"] .bg-slate-950\/75,
+html[data-theme="light"] .bg-slate-950\/80,
+html[data-theme="light"] .bg-slate-950\/90 {
+  background-color: rgb(var(--panel) / 0.72) !important;
+}
+
+html[data-theme="light"] .bg-white\/\[0\.025\],
+html[data-theme="light"] .bg-white\/\[0\.035\],
+html[data-theme="light"] .bg-white\/\[0\.045\],
+html[data-theme="light"] .bg-white\/\[0\.07\] {
+  background-color: rgb(var(--panel) / 0.62) !important;
 }
 
 @media (pointer: fine) {

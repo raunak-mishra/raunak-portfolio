@@ -15,7 +15,7 @@ const ProjectPreview = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.16),transparent_28%),radial-gradient(circle_at_80%_80%,rgba(34,197,94,0.12),transparent_28%)]" />
       <div className="relative flex items-center justify-between border-b border-white/10 pb-3">
         <div>
-          <div className="h-2 w-20 rounded-full bg-cyan-200/55" />
+          <div className="h-2 w-20 rounded-full bg-[rgb(var(--accent)/0.62)]" />
           <div className="mt-2 h-2 w-32 rounded-full bg-white/10" />
         </div>
         <div className="h-7 w-20 rounded-full border border-white/10 bg-white/[0.03]" />
@@ -27,7 +27,7 @@ const ProjectPreview = () => {
               key={item}
               className={`h-8 rounded-xl border px-3 py-2 text-[10px] ${
                 index === 0
-                  ? "border-cyan-300/45 bg-cyan-300/[0.08] text-cyan-100"
+                  ? "border-[rgb(var(--accent)/0.45)] bg-[rgb(var(--accent)/0.08)] text-[rgb(var(--text))]"
                   : "border-white/10 bg-white/[0.025] text-slate-500"
               }`}
             >
@@ -64,7 +64,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 
         <div className="flex flex-col justify-between gap-6">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-cyan-100/65">
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[rgb(var(--accent))]">
               Full-stack project
             </p>
             <h3 className="mt-3 font-display text-3xl font-semibold tracking-[-0.04em] text-slate-100 md:text-4xl">
@@ -79,7 +79,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                   key={highlight}
                   className="grid grid-cols-[18px_1fr] gap-3 text-sm text-slate-300"
                 >
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-300 shadow-[0_0_16px_rgba(110,231,183,0.75)]" />
+                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[rgb(var(--accent))] shadow-[0_0_16px_rgb(var(--accent)/0.65)]" />
                   <span>{highlight}</span>
                 </li>
               ))}

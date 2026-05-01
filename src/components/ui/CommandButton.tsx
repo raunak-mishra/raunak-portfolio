@@ -18,8 +18,8 @@ const CommandButton = ({
 }: CommandButtonProps) => {
   const variantClass =
     variant === "primary"
-      ? "border-cyan-100/80 bg-cyan-50 text-slate-950 shadow-[0_0_38px_rgba(103,232,249,0.28)] hover:border-cyan-200 hover:bg-cyan-100"
-      : "border-white/10 bg-white/[0.035] text-slate-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] hover:border-cyan-200/35 hover:bg-cyan-200/[0.07] hover:text-white";
+      ? "border-[rgb(var(--accent)/0.8)] bg-[rgb(var(--accent))] text-slate-950 shadow-[0_0_38px_rgb(var(--accent)/0.28)] hover:border-[rgb(var(--accent)/0.95)] hover:bg-[rgb(var(--accent)/0.9)]"
+      : "border-[rgb(var(--border))] bg-[rgb(var(--panel)/0.42)] text-[rgb(var(--text))] shadow-[inset_0_1px_0_rgb(255_255_255/0.08)] hover:border-[rgb(var(--accent)/0.38)] hover:bg-[rgb(var(--accent)/0.08)]";
 
   return (
     <MagneticButton

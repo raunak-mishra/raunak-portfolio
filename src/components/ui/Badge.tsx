@@ -4,10 +4,10 @@ type BadgeProps = {
 };
 
 const toneClasses = {
-  blue: "border-cyan-300/35 bg-cyan-300/[0.07] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.08)]",
+  blue: "border-[rgb(var(--accent-2)/0.35)] bg-[rgb(var(--accent-2)/0.07)] text-[rgb(var(--text))] shadow-[0_0_24px_rgb(var(--accent-2)/0.08)]",
   green:
-    "border-emerald-300/35 bg-emerald-300/[0.07] text-emerald-100 shadow-[0_0_24px_rgba(52,211,153,0.08)]",
-  neutral: "border-white/10 bg-white/[0.035] text-slate-300",
+    "border-[rgb(var(--accent)/0.35)] bg-[rgb(var(--accent)/0.07)] text-[rgb(var(--text))] shadow-[0_0_24px_rgb(var(--accent)/0.08)]",
+  neutral: "border-[rgb(var(--border))] bg-[rgb(var(--panel)/0.38)] text-[rgb(var(--muted))]",
 };
 
 const Badge = ({ children, tone = "neutral" }: BadgeProps) => {

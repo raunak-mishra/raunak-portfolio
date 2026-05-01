@@ -13,11 +13,11 @@ const GraphScene = () => {
   const groupRef = useRef<Group>(null);
   const nodes = useMemo<Node[]>(
     () => [
-      { position: [0, 0, 0], color: "#3B82F6", size: 0.11 },
-      { position: [-1.15, 0.45, -0.35], color: "#22C55E", size: 0.07 },
+      { position: [0, 0, 0], color: "#F6C979", size: 0.11 },
+      { position: [-1.15, 0.45, -0.35], color: "#7DD3FC", size: 0.07 },
       { position: [1.05, 0.55, -0.2], color: "#9CA3AF", size: 0.07 },
       { position: [-0.9, -0.75, 0.2], color: "#9CA3AF", size: 0.06 },
-      { position: [0.85, -0.65, 0.25], color: "#4ADE80", size: 0.06 },
+      { position: [0.85, -0.65, 0.25], color: "#C4B5FD", size: 0.06 },
       { position: [0.05, 1.05, 0.35], color: "#E5E7EB", size: 0.045 },
       { position: [-0.25, -1.15, -0.25], color: "#E5E7EB", size: 0.045 },
     ],
@@ -83,7 +83,7 @@ const SystemGraph = () => {
       <Suspense fallback={null}>
         <ambientLight intensity={0.7} />
         <pointLight position={[3, 3, 3]} intensity={1.3} color="#E5E7EB" />
-        <pointLight position={[-3, -2, 2]} intensity={0.7} color="#22C55E" />
+        <pointLight position={[-3, -2, 2]} intensity={0.7} color="#7DD3FC" />
         <GraphScene />
         <Preload all />
       </Suspense>

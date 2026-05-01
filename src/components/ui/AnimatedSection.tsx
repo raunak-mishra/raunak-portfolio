@@ -20,7 +20,7 @@ const AnimatedSection = ({ id, children, className = "" }: AnimatedSectionProps)
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
-      <motion.div style={{ y }} className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/25 to-transparent" />
+      <motion.div style={{ y }} className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent)/0.26)] to-transparent" />
       {children}
     </motion.section>
   );

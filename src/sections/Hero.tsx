@@ -27,10 +27,10 @@ const Hero = () => {
 
   return (
     <section className="relative mx-auto grid min-h-screen w-full max-w-7xl items-center gap-10 px-5 pb-16 pt-28 sm:px-8 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12 lg:px-10 lg:pt-28">
-      <div className="pointer-events-none absolute inset-x-5 top-24 h-px bg-gradient-to-r from-transparent via-cyan-300/25 to-transparent sm:inset-x-8 lg:inset-x-10" />
+      <div className="pointer-events-none absolute inset-x-5 top-24 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent)/0.28)] to-transparent sm:inset-x-8 lg:inset-x-10" />
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-24 top-36 h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl"
+        className="pointer-events-none absolute -left-24 top-36 h-72 w-72 rounded-full bg-[rgb(var(--accent)/0.12)] blur-3xl"
         animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.12, 1] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -41,8 +41,8 @@ const Hero = () => {
         transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10"
       >
-        <div className="inline-flex max-w-full items-center gap-3 rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-slate-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-2xl">
-          <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_18px_rgba(110,231,183,0.9)]" />
+        <div className="inline-flex max-w-full items-center gap-3 rounded-full border border-[rgb(var(--border))] bg-[rgb(var(--panel)/0.46)] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[rgb(var(--muted))] shadow-[inset_0_1px_0_rgb(255_255_255/0.08)] backdrop-blur-2xl">
+          <span className="h-2 w-2 rounded-full bg-[rgb(var(--accent))] shadow-[0_0_18px_rgb(var(--accent)/0.85)]" />
           systems.online / {profile.role}
         </div>
 
@@ -82,9 +82,9 @@ const Hero = () => {
       >
         <GlassCard className="h-full min-h-[420px] p-3 lg:min-h-[620px]" hover={false}>
           <div className="relative h-full min-h-[396px] overflow-hidden rounded-[1.45rem] border border-white/10 bg-slate-950/45 lg:min-h-[596px]">
-            <div className="absolute left-0 right-0 top-0 z-10 flex items-center justify-between border-b border-white/10 bg-slate-950/55 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.12em] text-slate-500 backdrop-blur-2xl">
-              <span>event-mesh.prod</span>
-              <span className="text-emerald-300">healthy</span>
+            <div className="absolute left-0 right-0 top-0 z-10 flex items-center justify-between border-b border-[rgb(var(--border))] bg-[rgb(var(--panel-strong)/0.58)] px-4 py-3 font-mono text-[11px] uppercase tracking-[0.12em] text-[rgb(var(--muted))] backdrop-blur-2xl">
+              <span>event-mesh.prod / spline+r3f</span>
+              <span className="text-[rgb(var(--accent))]">healthy</span>
             </div>
             <div className="absolute inset-0 pt-10">
               {webglAvailable ? (
@@ -111,7 +111,7 @@ const Hero = () => {
               ].map(([label, value]) => (
                 <div
                   key={label}
-                  className="rounded-2xl border border-white/10 bg-slate-950/60 px-3 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-2xl"
+                  className="rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--panel-strong)/0.62)] px-3 py-2 shadow-[inset_0_1px_0_rgb(255_255_255/0.06)] backdrop-blur-2xl"
                 >
                   <p className="text-slate-500">{label}</p>
                   <p className="mt-1 text-slate-100">{value}</p>

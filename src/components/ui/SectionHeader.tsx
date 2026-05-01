@@ -9,15 +9,15 @@ type SectionHeaderProps = {
 const SectionHeader = ({ eyebrow, title, description }: SectionHeaderProps) => {
   return (
     <motion.div
-      className="mb-10 grid gap-6 md:mb-14 md:grid-cols-[0.32fr_0.68fr]"
+      className="section-orbit mb-10 grid gap-6 md:mb-14 md:grid-cols-[0.32fr_0.68fr]"
       initial={{ opacity: 0, y: 22, filter: "blur(10px)" }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="flex items-start gap-3">
-        <span className="mt-1.5 h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_24px_rgba(110,231,183,0.8)]" />
-        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-cyan-100/70">
+        <span className="mt-1.5 h-2 w-2 rounded-full bg-[rgb(var(--accent))] shadow-[0_0_24px_rgb(var(--accent)/0.65)]" />
+        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-[rgb(var(--accent))]">
           {eyebrow}
         </p>
       </div>

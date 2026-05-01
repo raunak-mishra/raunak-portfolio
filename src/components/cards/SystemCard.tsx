@@ -20,7 +20,7 @@ const SystemCard = ({ system, index }: SystemCardProps) => {
       <GlassCard as="article" className="p-5 md:p-6">
         <div className="flex flex-col gap-4 border-b border-white/10 pb-5 md:flex-row md:items-start md:justify-between">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-cyan-100/65">
+            <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-[rgb(var(--accent))]">
               {system.company}
             </p>
             <h3 className="mt-3 font-display text-2xl font-semibold tracking-[-0.03em] text-slate-100">
@@ -53,7 +53,7 @@ const SystemCard = ({ system, index }: SystemCardProps) => {
                   key={item}
                   className="grid grid-cols-[18px_1fr] gap-3 text-sm leading-7 text-slate-300"
                 >
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_16px_rgba(103,232,249,0.7)]" />
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[rgb(var(--accent-2))] shadow-[0_0_16px_rgb(var(--accent-2)/0.58)]" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -65,7 +65,7 @@ const SystemCard = ({ system, index }: SystemCardProps) => {
           {system.impact.map((item) => (
             <div
               key={item}
-              className="rounded-2xl border border-emerald-300/15 bg-emerald-300/[0.06] px-3 py-3 font-mono text-xs text-emerald-100 shadow-[0_0_30px_rgba(16,185,129,0.06)]"
+              className="rounded-2xl border border-[rgb(var(--accent)/0.18)] bg-[rgb(var(--accent)/0.07)] px-3 py-3 font-mono text-xs text-[rgb(var(--text))] shadow-[0_0_30px_rgb(var(--accent)/0.06)]"
             >
               {item}
             </div>

@@ -35,7 +35,7 @@ const Metrics = () => {
                   decimals={metric.decimals}
                 />
               </p>
-              <div className="mt-5 h-px w-full bg-gradient-to-r from-cyan-300/35 via-emerald-300/20 to-transparent" />
+              <div className="mt-5 h-px w-full bg-gradient-to-r from-[rgb(var(--accent)/0.38)] via-[rgb(var(--accent-2)/0.22)] to-transparent" />
               <p className="mt-4 text-sm leading-7 text-slate-400">{metric.note}</p>
             </GlassCard>
           </motion.div>

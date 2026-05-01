@@ -1,9 +1,9 @@
 const nodes = [
-  "left-[49%] top-[45%] h-5 w-5 border-blue-400",
-  "left-[25%] top-[30%] h-3.5 w-3.5 border-green-400",
-  "left-[72%] top-[32%] h-3.5 w-3.5 border-blue-300",
+  "left-[49%] top-[45%] h-5 w-5 border-[rgb(var(--accent))]",
+  "left-[25%] top-[30%] h-3.5 w-3.5 border-[rgb(var(--accent-2))]",
+  "left-[72%] top-[32%] h-3.5 w-3.5 border-[rgb(var(--accent-3))]",
   "left-[30%] top-[68%] h-3 w-3 border-slate-300",
-  "left-[68%] top-[66%] h-3 w-3 border-green-300",
+  "left-[68%] top-[66%] h-3 w-3 border-[rgb(var(--accent-2))]",
 ];
 
 const lines = [
@@ -21,7 +21,7 @@ const TopologyFallback = () => {
       {lines.map((line) => (
         <span
           key={line}
-          className={`absolute h-px origin-left bg-gradient-to-r from-transparent via-cyan-200/55 to-transparent ${line}`}
+          className={`absolute h-px origin-left bg-gradient-to-r from-transparent via-[rgb(var(--accent)/0.55)] to-transparent ${line}`}
         />
       ))}
       {nodes.map((node, index) => (
@@ -30,7 +30,7 @@ const TopologyFallback = () => {
           className={`absolute rounded-full border bg-[#050713] shadow-[0_0_28px_rgba(34,211,238,0.22)] ${node}`}
         >
           {index === 0 ? (
-            <span className="absolute inset-[-12px] rounded-full border border-cyan-300/20" />
+            <span className="absolute inset-[-12px] rounded-full border border-[rgb(var(--accent)/0.2)]" />
           ) : null}
         </span>
       ))}

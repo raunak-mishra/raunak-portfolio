@@ -30,7 +30,7 @@ const Achievements = () => {
               <h3 className="mt-4 min-h-16 font-display text-xl font-semibold tracking-[-0.03em] text-slate-100">
                 {achievement.title}
               </h3>
-              <p className="mt-4 font-mono text-sm text-emerald-200">
+              <p className="mt-4 font-mono text-sm text-[rgb(var(--accent))]">
                 {achievement.detail}
               </p>
             </GlassCard>

@@ -10,7 +10,7 @@ const SectionShell = ({ id, children, className = "" }: SectionShellProps) => {
   return (
     <AnimatedSection
       id={id}
-      className={`relative mx-auto w-full max-w-7xl scroll-mt-24 px-5 py-16 sm:px-8 lg:px-10 lg:py-24 ${className}`}
+      className={`cinematic-section relative mx-auto w-full max-w-7xl scroll-mt-24 px-5 py-16 sm:px-8 lg:px-10 lg:py-24 ${className}`}
     >
       {children}
     </AnimatedSection>

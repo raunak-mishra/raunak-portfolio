@@ -6,11 +6,15 @@ import {
   Float32BufferAttribute,
   Line as ThreeLine,
   LineBasicMaterial,
+  ShaderMaterial,
   type Group,
   type Mesh,
   type Points,
+  Vector2,
   Vector3,
 } from "three";
+
+import SplineHybridLayer from "./SplineHybridLayer";
 
 type HeroNode = {
   id: string;
@@ -27,7 +31,7 @@ const heroNodes: HeroNode[] = [
     label: "Node.js",
     detail: "high-throughput APIs",
     position: [0, 0, 0.18],
-    color: "#38bdf8",
+    color: "#f6c979",
     size: 0.16,
   },
   {
@@ -35,7 +39,7 @@ const heroNodes: HeroNode[] = [
     label: "Kafka",
     detail: "event streams",
     position: [-1.45, 0.68, -0.2],
-    color: "#22c55e",
+    color: "#7dd3fc",
     size: 0.095,
   },
   {
@@ -43,7 +47,7 @@ const heroNodes: HeroNode[] = [
     label: "GCP",
     detail: "managed infrastructure",
     position: [1.32, 0.78, -0.34],
-    color: "#60a5fa",
+    color: "#c4b5fd",
     size: 0.09,
   },
   {
@@ -51,7 +55,7 @@ const heroNodes: HeroNode[] = [
     label: "BigQuery",
     detail: "streaming warehouse",
     position: [1.2, -0.82, 0.12],
-    color: "#a78bfa",
+    color: "#fb7185",
     size: 0.085,
   },
   {
@@ -59,7 +63,7 @@ const heroNodes: HeroNode[] = [
     label: "Webhooks",
     detail: "delivery telemetry",
     position: [-1.28, -0.75, 0.06],
-    color: "#34d399",
+    color: "#99f6e4",
     size: 0.085,
   },
   {
@@ -126,36 +130,85 @@ const ConnectionLine = ({
   return <primitive object={line} />;
 };
 
-const StarField = () => {
+const particleVertexShader = `
+  uniform float uTime;
+  uniform vec2 uPointer;
+  varying float vAlpha;
+
+  void main() {
+    vec3 transformed = position;
+    float proximity = smoothstep(1.2, 0.0, distance(position.xy, uPointer * 2.4));
+    transformed.xy += normalize(position.xy - uPointer * 2.4 + 0.001) * proximity * 0.22;
+    transformed.z += sin(uTime * 0.65 + position.x * 2.7 + position.y * 2.1) * 0.08;
+    vAlpha = 0.28 + proximity * 0.72;
+
+    vec4 mvPosition = modelViewMatrix * vec4(transformed, 1.0);
+    gl_PointSize = (2.1 + proximity * 4.4) * (4.0 / -mvPosition.z);
+    gl_Position = projectionMatrix * mvPosition;
+  }
+`;
+
+const particleFragmentShader = `
+  precision highp float;
+  varying float vAlpha;
+
+  void main() {
+    vec2 center = gl_PointCoord - 0.5;
+    float glow = 1.0 - smoothstep(0.08, 0.5, length(center));
+    vec3 color = mix(vec3(0.50, 0.86, 0.96), vec3(0.96, 0.74, 0.42), vAlpha);
+    gl_FragColor = vec4(color, glow * vAlpha);
+  }
+`;
+
+const ReactiveParticleField = () => {
   const pointsRef = useRef<Points>(null);
+  const materialRef = useRef<ShaderMaterial>(null);
   const geometry = useMemo(() => {
-    const positions = new Float32Array(360 * 3);
+    const positions = new Float32Array(620 * 3);
 
     for (let index = 0; index < positions.length; index += 3) {
-      positions[index] = (Math.random() - 0.5) * 7;
-      positions[index + 1] = (Math.random() - 0.5) * 4.6;
-      positions[index + 2] = -Math.random() * 4.5;
+      positions[index] = (Math.random() - 0.5) * 6.4;
+      positions[index + 1] = (Math.random() - 0.5) * 4.2;
+      positions[index + 2] = -Math.random() * 4.8;
     }
 
     const starGeometry = new BufferGeometry();
     starGeometry.setAttribute("position", new Float32BufferAttribute(positions, 3));
     return starGeometry;
   }, []);
+  const uniforms = useMemo(
+    () => ({
+      uTime: { value: 0 },
+      uPointer: { value: new Vector2(0, 0) },
+    }),
+    []
+  );
 
-  useFrame(({ clock }) => {
-    if (!pointsRef.current) return;
-    pointsRef.current.rotation.y = clock.elapsedTime * 0.012;
-    pointsRef.current.rotation.x = Math.sin(clock.elapsedTime * 0.18) * 0.02;
+  useFrame(({ clock, pointer }) => {
+    if (pointsRef.current) {
+      pointsRef.current.rotation.y = clock.elapsedTime * 0.012;
+      pointsRef.current.rotation.x = Math.sin(clock.elapsedTime * 0.18) * 0.02;
+    }
+
+    if (materialRef.current) {
+      materialRef.current.uniforms.uTime.value = clock.elapsedTime;
+      materialRef.current.uniforms.uPointer.value.x +=
+        (pointer.x - materialRef.current.uniforms.uPointer.value.x) * 0.08;
+      materialRef.current.uniforms.uPointer.value.y +=
+        (pointer.y - materialRef.current.uniforms.uPointer.value.y) * 0.08;
+    }
   });
 
   return (
     <points ref={pointsRef} geometry={geometry}>
-      <pointsMaterial
-        color="#bae6fd"
-        size={0.012}
+      <shaderMaterial
+        ref={materialRef}
+        uniforms={uniforms}
+        vertexShader={particleVertexShader}
+        fragmentShader={particleFragmentShader}
         transparent
-        opacity={0.58}
         depthWrite={false}
+        blending={AdditiveBlending}
       />
     </points>
   );
@@ -265,15 +318,15 @@ const AtmosphereRing = () => {
     <group ref={ringRef}>
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[1.85, 0.004, 8, 180]} />
-        <meshBasicMaterial color="#38bdf8" transparent opacity={0.22} />
+        <meshBasicMaterial color="#f6c979" transparent opacity={0.22} />
       </mesh>
       <mesh rotation={[Math.PI / 2.15, 0.24, 0.3]}>
         <torusGeometry args={[1.38, 0.003, 8, 180]} />
-        <meshBasicMaterial color="#22c55e" transparent opacity={0.14} />
+        <meshBasicMaterial color="#7dd3fc" transparent opacity={0.14} />
       </mesh>
       <mesh rotation={[Math.PI / 1.85, -0.3, -0.2]}>
         <torusGeometry args={[2.24, 0.003, 8, 180]} />
-        <meshBasicMaterial color="#a78bfa" transparent opacity={0.1} />
+        <meshBasicMaterial color="#c4b5fd" transparent opacity={0.1} />
       </mesh>
     </group>
   );
@@ -298,7 +351,7 @@ const GraphScene = ({
 
   return (
     <>
-      <StarField />
+      <ReactiveParticleField />
       <group ref={groupRef}>
         <AtmosphereRing />
 
@@ -307,7 +360,7 @@ const GraphScene = ({
             key={`${from}-${to}`}
             from={heroNodes[from].position}
             to={heroNodes[to].position}
-            color={index % 3 === 0 ? "#38bdf8" : "#64748b"}
+            color={index % 3 === 0 ? "#f6c979" : "#64748b"}
             opacity={index % 3 === 0 ? 0.52 : 0.34}
           />
         ))}
@@ -317,7 +370,7 @@ const GraphScene = ({
             key={`packet-${from}-${to}`}
             from={heroNodes[from].position}
             to={heroNodes[to].position}
-            color={index % 2 === 0 ? "#38bdf8" : "#22c55e"}
+            color={index % 2 === 0 ? "#f6c979" : "#7dd3fc"}
             offset={index * 0.11}
           />
         ))}
@@ -339,9 +392,11 @@ const GraphScene = ({
 const Hero3DScene = () => {
   const [hovered, setHovered] = useState<string | null>(null);
   const hoveredNode = heroNodes.find((node) => node.id === hovered);
+  const splineSceneUrl = import.meta.env.VITE_SPLINE_HERO_SCENE as string | undefined;
 
   return (
     <div className="relative h-full w-full">
+      <SplineHybridLayer sceneUrl={splineSceneUrl} />
       <Canvas
         dpr={[1, 1.55]}
         camera={{ position: [0, 0.05, 4.6], fov: 40 }}
@@ -349,21 +404,21 @@ const Hero3DScene = () => {
         onPointerMissed={() => setHovered(null)}
       >
         <Suspense fallback={null}>
-          <fog attach="fog" args={["#050713", 4.4, 8]} />
+          <fog attach="fog" args={["#07040d", 4.4, 8]} />
           <ambientLight intensity={0.55} />
-          <pointLight position={[2.8, 2.6, 2.8]} intensity={2.4} color="#38bdf8" />
-          <pointLight position={[-2.4, -2.2, 2.2]} intensity={1.8} color="#22c55e" />
-          <pointLight position={[0, 1.6, -2.5]} intensity={1.2} color="#a78bfa" />
+          <pointLight position={[2.8, 2.6, 2.8]} intensity={2.4} color="#f6c979" />
+          <pointLight position={[-2.4, -2.2, 2.2]} intensity={1.8} color="#7dd3fc" />
+          <pointLight position={[0, 1.6, -2.5]} intensity={1.2} color="#c4b5fd" />
           <GraphScene hovered={hovered} onHover={setHovered} />
         </Suspense>
       </Canvas>
 
       {hoveredNode ? (
-        <div className="pointer-events-none absolute right-4 top-16 rounded-2xl border border-cyan-200/20 bg-slate-950/75 px-3 py-2 text-right shadow-[0_18px_60px_rgba(8,47,73,0.55)] backdrop-blur-xl">
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-200">
+        <div className="pointer-events-none absolute right-4 top-16 rounded-2xl border border-[rgb(var(--accent)/0.24)] bg-[rgb(var(--panel-strong)/0.78)] px-3 py-2 text-right shadow-[0_18px_60px_rgb(var(--shadow))] backdrop-blur-xl">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[rgb(var(--accent))]">
             {hoveredNode.label}
           </p>
-          <p className="mt-1 text-[11px] text-slate-300">{hoveredNode.detail}</p>
+          <p className="mt-1 text-[11px] text-[rgb(var(--muted))]">{hoveredNode.detail}</p>
         </div>
       ) : null}
     </div>
