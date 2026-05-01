@@ -136,14 +136,6 @@ html[data-theme="light"] .bg-white\/\[0\.07\] {
   background-color: rgb(var(--panel) / 0.62) !important;
 }
 
-@media (pointer: fine) {
-  .has-custom-cursor,
-  .has-custom-cursor a,
-  .has-custom-cursor button {
-    cursor: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

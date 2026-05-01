@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect } from "react";
 
 import Navbar from "./components/layout/Navbar";
 import CinematicScrollProvider from "./components/ui/CinematicScrollProvider";
-import CustomCursor from "./components/ui/CustomCursor";
 import SmoothScrollProvider from "./components/ui/SmoothScrollProvider";
 import ThemeProvider, { useTheme } from "./components/ui/ThemeProvider";
 import { profile } from "./constants/portfolio";
@@ -22,7 +21,6 @@ const PortfolioExperience = () => {
   return (
     <SmoothScrollProvider>
       <CinematicScrollProvider>
-        <CustomCursor />
         <div className="relative min-h-screen overflow-hidden bg-[rgb(var(--bg))] text-[rgb(var(--text))] transition-colors duration-500">
         <div className="pointer-events-none fixed inset-0 z-0">
           <Suspense fallback={null}>

@@ -4,7 +4,6 @@ import Badge from "./ui/Badge";
 import CinematicScrollProvider from "./ui/CinematicScrollProvider";
 import CommandButton from "./ui/CommandButton";
 import CanvasBoundary from "./ui/CanvasBoundary";
-import CustomCursor from "./ui/CustomCursor";
 import GlassCard from "./ui/GlassCard";
 import MagneticButton from "./ui/MagneticButton";
 import MetricCounter from "./ui/MetricCounter";
@@ -24,7 +23,6 @@ export {
   CanvasBoundary,
   CinematicScrollProvider,
   CommandButton,
-  CustomCursor,
   GlassCard,
   MagneticButton,
   MetricCounter,

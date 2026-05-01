@@ -83,7 +83,7 @@ const Hero = () => {
         <GlassCard className="h-full min-h-[420px] p-3 lg:min-h-[620px]" hover={false}>
           <div className="relative h-full min-h-[396px] overflow-hidden rounded-[1.45rem] border border-white/10 bg-slate-950/45 lg:min-h-[596px]">
             <div className="absolute left-0 right-0 top-0 z-10 flex items-center justify-between border-b border-[rgb(var(--border))] bg-[rgb(var(--panel-strong)/0.58)] px-4 py-3 font-mono text-[11px] uppercase tracking-[0.12em] text-[rgb(var(--muted))] backdrop-blur-2xl">
-              <span>event-mesh.prod / spline+r3f</span>
+              <span>event-mesh.prod</span>
               <span className="text-[rgb(var(--accent))]">healthy</span>
             </div>
             <div className="absolute inset-0 pt-10">
